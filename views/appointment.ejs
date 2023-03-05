@@ -1,0 +1,69 @@
+<h5 class="font-extrabold text-2xl"> 
+    <%= title%> <span class="bg-gray-100 text-sm font-small mr-2 px-2 py-0.5  rounded dark:text-gray-900 dark-bg-gray-200 justify-center items-center items" id="count-<%= title%>"><%= data.length%></span>
+  </h5>
+  <ul class="list-none">
+    <!-- <li >
+      <div class="flex items-center w-full my-2 px-2 py-1 hover:bg-green-100 rounded">
+        <div class="flex-auto">
+          <h1 class="ml-2 text-sm text-gray-900 ">
+            Description
+          </h1>
+        </div>
+        <div class="flex-auto">
+          <h1 class="ml-2 text-sm text-gray-900 ">
+            StartTime
+          </h1>
+        </div>
+        <div class="flex-auto">
+          <h1 class="ml-2 text-sm text-gray-900 ">
+            EndTime
+          </h1>
+        </div>
+        <div class="flex-auto">
+          <h1 class="ml-2 text-sm text-gray-900 ">
+            UpdateEvent
+          </h1>
+        </div>
+        <div class="flex-auto">
+          <h1 class="ml-2 text-sm text-gray-900 ">
+            DeleteEvent
+          </h1>
+        </div>
+      </div>
+    </li>
+    <hr>  -->
+    <% for(var i=0;i<data.length;i++) { %>
+      <li >
+        <div class="flex items-center gap-8 mr-7 my-4 px-2 py-1 bg-gray-400 rounded">
+          <div class="flex-auto">
+            <h1 class="ml-2 text-xl font-bold text-gray-900 ">
+              <%= data[i].description%>
+            </h1>
+          </div>
+          <div class="flex-auto">
+            <h1 class="ml-2 text-xl text-gray-900 ">
+              <strong>Start:</strong><%="  "+ data[i].startTime%>
+            </h1>
+          </div>
+          <div class="flex-auto">
+            <h1 class="ml-2 text-xl text-gray-900 ">
+              <strong>End:</strong><%="  "+ data[i].endTime%>
+            </h1>
+          </div>
+          <div class="flex-auto">
+            <a href="/edit-appointment/<%= data[i].id %>/" class="ml-2 text-xl font-bold text-purple-600 hover:cursor-pointer">
+              Edit
+            </a>
+          </div>
+          <div class="flex-auto">
+            <button onclick="deleteAppointment(`<%= data[i].id%>`)" class="ml-2 text-xl font-bold text-red-600 hover:cursor-pointer">
+              Delete
+            </button>
+          </div>
+        </div>
+      </li>
+      <% } %>
+    
+
+  </ul>
+

@@ -1,0 +1,41 @@
+<nav class="navbar bg-body-tertiary rounded">
+  <div class="bg-gray-300 text-white px-2 py-5 rounded font-mediium py-1.5">
+    <center class="text-3xl ml-5 font-extrabold text-orange-600 py-2">
+      <a class="navbar-brand" href="/">Appointments Scheduling Application</a>
+    </center>
+    <% if(login == true) { %>
+    <div class="container-fluid float-right mr-5">
+      <button
+        class="navbar-toggler mr-4"
+      >
+        <strong class="navbar-toggler-icon bg-red-700"
+          ><a
+            href="/signout"
+            class="bg-red-600 text-white px-2 py-2 rounded font-mediium mt-2"
+            >Sign-Out</a
+          ></strong
+        >
+      </button>
+    </div>
+    <% }else{ %>
+    <div class="container-fluid float-right mr-5">
+      <button
+        class="navbar-toggler mr-4"
+        type="button"
+      >
+        <strong class="navbar-toggler-icon bg-green-400"
+          ><a href="/login" class="bg-green-600 text-white px-2 py-2 rounded font-mediium mt-2">LOGIN</a></strong
+        >
+      </button>
+      <button
+        class="navbar-toggler mr-4"
+        type="button"
+      >
+        <strong class="navbar-toggler-icon bg-blue-400"
+          ><a href="/signup" class="bg-orange-400 text-white px-2 py-2 rounded font-mediium mt-2">Sign-up</a></strong
+        >
+      </button>
+    </div>
+    <% } %>
+  </div>
+</nav>

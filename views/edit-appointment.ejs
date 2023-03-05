@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="csrf-token" content="<%= csrfToken %>" />
+    <link href="./css/styles.css" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <title><%= title%></title>
+    
+  </head>
+  <body
+  style="
+    background-color: beige;
+    font-family: 'Courier New', Courier, monospace;
+  "
+>
+<div class="bg-gray-300 text-white px-2 py-2 rounded font-mediium">
+  <%- include("header.ejs",{login})%>
+  <h1 class="ml-5 font-bold text-2xl">/<a href="/">Home</a>/<a href="/welcome">Appointments</a>/<a href="/edit-appointment/<%= appointmentId%>"class="text-yellow-600">Edit-Appointments</a></h1>
+</div>
+    <div class="grid grid-cols-6">
+      <div class="col-start-2 col-span-4">
+        
+        <h1 class="text-black-600 text-2xl font-bold">Update Appointment name here..</h1>
+        <form method="post" action="/edit-appointment/<%= appointmentId%>">
+            <div class="py-3">
+              <input type="hidden" name="_csrf" value="<%= csrfToken%>"/>
+              <input
+                type="text"
+                name="description"
+                class="border border-color-gray-300 text-gray-900 rounded w-full p-2 text-sm"
+                value="<%= appointment.description %>"
+                placeholder="Update appointment name here.."
+              />
+              </div>
+              <input
+                type="submit"
+                value="UPDATE"
+                class="bg-green-600 text-white px-2 py-1 rounded font-mediium py-1.5 hover:cursor-pointer"
+              ></div>
+        </form>
+        </div>
+      </div>
+    </div>
+    <ul ><% if(messages && messages.error && messages.error.length > 0)  { %>
+        <% for(var i=0; i<messages.error.length; i++) { %>
+                <li class="text-red-600 text-xl " align="center"> <%= messages.error[i] %></li>
+        <% } %>
+      <% } %></ul>
+  </body>
+</html>

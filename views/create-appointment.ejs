@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="csrf-token" content="<%= csrfToken %>" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="./css/styles.css" rel="stylesheet" />
+    <title><%= title%></title>
+  </head>
+  <body>
+    <div class="bg-gray-300 text-white px-2 py-2 rounded font-mediium">
+      <%- include("header.ejs",{login})%>
+      <strong class="ml-5 font-bold text-2xl" >/<a href="/">Home</a>/<a href="/welcome">Appointments</a>/<a href="/create-appointment" class="text-yellow-600">Create-Appointment</a>
+      </strong>
+    </div>
+    <div class="grid grid-cols-6">
+      <div class="col-start-2 col-span-4">
+        
+        <form action="/create-appointment" method="post">
+          <div class="flex gap-2 py-4 text-2xl">
+            <div class="flex-auto">
+              <input type="hidden" name="_csrf" value="<%= csrfToken %>" />
+              Description: <input
+                type="text"
+                placeholder="create your next appointment.!"
+                name="description"
+                class="border border-color-gray-300 text-gray-900 rounded w-full p-2 text-sm"
+                required
+                >
+              Start Time:
+              <input
+                type="time"
+                name="startTime"
+                class="border border-color-gray-300 text-gray-900 rounded w-full p-2 text-sm"
+                required
+                >
+              End Time:
+              <input
+              type="time"
+              name="endTime"
+              class="border border-color-gray-300 text-gray-900 rounded w-full p-2 text-sm"
+              required
+              >
+              <br>
+              <button
+              type="submit"
+              class="bg-green-600 text-white px-5 py-1 rounded font-mediium mt-4"
+              >
+              ADD
+            </button>
+          </div>
+          </div>
+        </form>
+        <ul class="rounded">
+          <% if(messages && messages.error && messages.error.length > 0)  { %>
+            <li class="bg-gray-200 text-red-700 text-2xl">Error..!</li>
+          <% for(var i=0; i<messages.error.length; i++) { %>
+            <li class="text-red-600 font-bold text-2xl bg-gray-100"> <%= messages.error[i] %></li>
+            <% if(messages.error[i].length > 22){ %>
+            <li class="text-red-600 font-sans text-xl bg-gray-100"> "You are already having an appointment in this time slot. If you want to add current event in the same slot, makesure you delete the overlapped event or <span class="text-green-700">choose other(Recommended) TimeSlot</span> "</li>
+            <% } %>    
+          <% } %>
+        <% } %></ul>
+        <div>
+          
+          <!-- <%-include("footer.ejs") %> -->
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

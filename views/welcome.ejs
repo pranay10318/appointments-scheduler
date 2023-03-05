@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="csrf-token" content="<%= csrfToken %>" />
+    <link href="./css/styles.css" rel="stylesheet" />
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <title><%= title%></title>
+    <script>
+      var token = document
+        .querySelector('meta[name="csrf-token"]')
+        .getAttribute("content");
+      // const updateTodo = (id, bool) => {
+      //   //here we are taking checked attribute from todo.ejs
+      //   console.log(bool);
+      //   fetch(`/elections/${id}`, {
+      //     method: "put",
+      //     headers: { "content-Type": "application/json" },
+      //     body: JSON.stringify({
+      //       //for it we are needed to pass the completion status
+      //       completed: !bool,
+      //       _csrf: token,
+      //     }),
+      //   })
+      //     .then((res) => {
+      //       if (res.ok) {
+      //         window.location.reload();
+      //       }
+      //     })
+      //     .catch((err) => console.error(err));
+      // };
+      function deleteAppointment(id) {
+        fetch(`/appointments/${id}`, {
+          //url to make the to as completed after that we need to reload   headers and body can also be placed
+          method: "delete",
+          headers: { "Content-type": "application/json" },
+          body: JSON.stringify({
+            _csrf: token,
+          }),
+        })
+          .then((res) => {
+            if (res.ok) {
+              window.location.reload();
+            }
+          })
+          .catch((err) => console.error(err)); //o/p error to the console
+      }
+    </script>
+  </head>
+  <body
+    style="
+      background-color: beige;
+      font-family: 'Courier New', Courier, monospace;
+    "
+  >
+  <div class="bg-gray-300 text-white px-2 py-2 rounded font-mediium">
+    <%- include("header.ejs",{login})%>
+    <strong class="ml-5 font-bold text-2xl" >/<a href="/">Home</a>/<a href="/welcome" class="text-yellow-600">Appointments</a></strong>
+  </div>
+  
+    <div class="grid grid-cols-6">
+      <div class="ml-4 col-start-2 col-span-5">
+        <ul class="bg-gray-200 mt-2 w-fit">
+          <% if(messages && messages.success && messages.success.length > 0)  { %>
+            <li class="bg-gray-300 text-green-700 font-extrabold text-3xl">Success..!</li>
+            <% for(var i=0; i<messages.success.length; i++) { %>
+              <li class="text-black-600 font-bold text-2xl"> <%= messages.success[i] %></li>
+              <li class="text-black-600 font-bold text-2xl">click below to get started with creating appointments...</li>    
+            <% } %>
+          <% } %>
+        </ul>
+        <h1 class="text-xl mt-5 bg-blue-300 rounded w-fit pr-4">
+          <button class="ml-2 text-xl font-bold text-red-600 hover:cursor-pointer w-fit">
+            <a href="/create-appointment" class="ml-2">create a new Appointment</a>
+          </button>
+        </h1>
+        <div class="mt-10">
+          <%-include("appointment.ejs",{title:"Appointments",data:allAppointments})%>
+        </div>
+        <!-- <%-include("footer.ejs")%> -->
+      </div>
+  </body>
+
+</html>

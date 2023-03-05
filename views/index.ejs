@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="csrf-token" content="<%= csrfToken %>" />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="./css/styles.css" rel="stylesheet" />
+    <title><%= title%></title>
+  </head>
+  <body>
+    <div class="bg-gray-300 text-white px-2 py-2 rounded font-mediium">
+      <%- include("header.ejs",{login})%>
+      <h1 class="ml-5 font-bold text-3xl">/<a href="/" class="text-yellow-600">Home</a></h1>
+    </div>
+    <% if(loginStatus ==true){%>
+    <div class="grid grid-cols-6">
+      <div class="col-start-3 col-span-2">
+        <h1>Hey admin! You are already logged in..!</h1>
+        <button
+          class="bg-green-600 text-white px-2 py-2 rounded font-mediium mt-2"
+        >
+          <a href="/welcome">See Your Appointments</a>
+        </button>
+        <% } else{ %>
+        <p class="font-mediium font-bold text-3xl py-2 m-2">welcome to Appointments scheduling application</p>
+        <p class="font-mediium font-bold text-2xl m-2">
+          This is an online appointment scheduling application, i have used node js for creating this application. A user can be able to <span class="font-bold text-red-300">signup</span> and <span class="font-bold text-red-300">login</span> as well. User can <span class="font-bold text-red-300">create</span>, <span class="font-bold text-red-300">edit</span>, <span class="font-bold text-red-300">delete</span> appointments. User can see a list of scheduled appointments. If the time slots are <span class="font-bold text-red-500">overlapping</span>, the application shows with which Event the overlapping is being occured. It would also suggest the closest available time for scheculing if the user tries to schedule an appointment in a time slot with existing appointments.
+          </p>
+        <p class="font-mediium font-bold text-2xl m-2">Node. js (Node) is an open source, cross-platform runtime environment for executing JavaScript code.
+          Node is used extensively for server-side programming, making it possible for developers to use JavaScript
+          for client-side and server-side code without needing to learn an additional language.
+        </p>
+        <% } %>
+      </div>
+    </div>
+  </body>
+</html>
